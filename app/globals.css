@@ -1,26 +1,60 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@plugin '../hero.js';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-rubik), sans-serif;
+    font-weight: 500;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-nunito), sans-serif;
+    font-weight: 700;
+}
+
+@utility neumorphic {
+    box-shadow: -5px -5px 20px #00000022, 5px 5px 20px #00000044;
+}
+
+@utility neumorphic-in {
+    box-shadow: inset -3px -3px 5px #00000022, inset 3px 3px 5px #00000044;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation-name: fadeIn;
+    animation-duration: 6s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@layer base {
+    :root {
+        --chart-1: 12 76% 61%;
+        --chart-2: 173 58% 39%;
+        --chart-3: 197 37% 24%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+    }
+
+    .dark {
+        --chart-1: 220 70% 50%;
+        --chart-2: 160 60% 45%;
+        --chart-3: 30 80% 55%;
+        --chart-4: 280 65% 60%;
+        --chart-5: 340 75% 55%;
+    }
 }
