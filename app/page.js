@@ -3,8 +3,9 @@ import AccountCard from "@/components/AccountCard";
 import RotatingGradient from "@/components/RotatingGradient";
 import CalculatorInput from "@/components/CalculatorInput";
 import CalculatorResults from "@/components/CalculatorResults";
+import {fetchPresets} from "@/lib/api";
 
-export default function Home() {
+const Home = async () => {
     return (
         <div>
             <MenuCard/>
@@ -18,9 +19,11 @@ export default function Home() {
                     <RotatingGradient className="absolute inset-0
                     invisible group-hover:visible group-focus-within:visible transition-transform animate-pulse
                     blur-[10px] rounded-2xl"/>
-                    <CalculatorInput/>
+                    <CalculatorInput presets={await fetchPresets()}/>
                 </div>
             </main>
         </div>
     );
 }
+
+export default Home;
