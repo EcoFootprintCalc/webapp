@@ -27,7 +27,7 @@ const LightProvider = ({children}) => {
             {mode &&
                 <>
                     <div className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9998]'>
-                        <Image alt="caseoh" src={"/flash.gif"} width={500} height={500} unoptimized/>
+                        <Image alt="flash" src={"/flash.gif"} width={500} height={500} unoptimized/>
                     </div>
                     <div className="fixed inset-0 bg-white z-[9999] animate-fade-in"/>
                 </>
