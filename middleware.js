@@ -1,16 +1,24 @@
-import { NextResponse } from 'next/server';
+import {NextResponse} from 'next/server';
 
-export function middleware(request) {
+const loggedIn = async (token) => {
+    if (!token) return false;
+
+    const authResponse = await fetch(`${process.env.API_URL}/auth/logincheck`, {
+        method: "GET", headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token.value}`}
+    })
+
+    return authResponse.ok
+}
+
+export async function middleware(request) {
+    const {pathname} = request.nextUrl;
     const authToken = request.cookies.get('auth_token');
-    const { pathname } = request.nextUrl;
 
-    if (authToken && pathname.startsWith('/auth')) {
+    if (pathname === '/' && !await loggedIn(authToken))
+        return NextResponse.redirect(new URL('/auth/login', request.url));
+
+    if (pathname.startsWith('/auth') && await loggedIn(authToken))
         return NextResponse.redirect(new URL('/', request.url));
-    }
-
-    if (!authToken && pathname === '/') {
-        return NextResponse.redirect(new URL('/auth/signup', request.url));
-    }
 
     return NextResponse.next();
 }
