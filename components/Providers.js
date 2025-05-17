@@ -4,14 +4,14 @@ import {HeroUIProvider, ToastProvider} from "@heroui/react";
 import {createContext, useContext, useState} from "react";
 import Image from "next/image";
 
-const Providers = ({children}) => {
+const Providers = ({user, children}) => {
     return (
         <HeroUIProvider>
             <ToastProvider/>
             <LightProvider>
-                <CalculationProvider>
+                <UserProvider user={user}>
                     {children}
-                </CalculationProvider>
+                </UserProvider>
             </LightProvider>
         </HeroUIProvider>
     );
@@ -37,11 +37,12 @@ const LightProvider = ({children}) => {
     )
 }
 
-const CalculationContext = createContext({
+const UserContext = createContext({
     footprint: 0, addFootprint: () => {
     }
 });
-const CalculationProvider = ({children}) => {
+const UserProvider = ({user, children}) => {
+    const [userData, setUserData] = useState(user);
     const [footprint, setFootprint] = useState(0);
 
     const addFootprint = (value) => {
@@ -49,18 +50,23 @@ const CalculationProvider = ({children}) => {
     }
 
     return (
-        <CalculationContext.Provider value={{footprint, addFootprint}}>
+        <UserContext.Provider value={{footprint, addFootprint, userData, setUserData}}>
             {children}
-        </CalculationContext.Provider>
+        </UserContext.Provider>
     )
 }
 
 export const useCalculator = () => {
-    return useContext(CalculationContext);
+    return useContext(UserContext);
+}
+
+export const useUser = () => {
+    const ctx = useContext(UserContext);
+    return {...ctx.userData, set: ctx.setUserData};
 }
 
 export const useFootprint = () => {
-    const ctx = useContext(CalculationContext);
+    const ctx = useContext(UserContext);
     return ctx.footprint;
 }
 

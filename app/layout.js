@@ -1,6 +1,7 @@
 import {Nunito, Rubik} from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import {getUser} from "@/lib/api";
 
 const rubik = Rubik({
     variable: "--font-rubik",
@@ -17,7 +18,7 @@ export const metadata = {
     description: "Eco footprint calculator",
 };
 
-export default function RootLayout({children}) {
+export default async function RootLayout({children}) {
     return (
         <html lang="en">
         <head>
@@ -26,7 +27,7 @@ export default function RootLayout({children}) {
         <body
             className={`${rubik.variable} ${nunito.variable} antialiased bg-black`}
         >
-        <Providers>
+        <Providers user={await getUser()}>
             {children}
         </Providers>
         </body>
