@@ -23,8 +23,12 @@ const AccountCard = () => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [state, formAction, pending] = useActionState(editUser, {err: false});
 
-    const [userPic, setUserPic] = useState(0);
     const user = useUser();
+    const [userPic, setUserPic] = useState(user.profileIMG ?? 0);
+
+    useEffect(() => {
+        setUserPic(user.profileIMG ?? 0);
+    }, [user.profileIMG]);
 
     useEffect(() => {
         const updateUser = async () => user.set(await getUser());
@@ -67,8 +71,8 @@ const AccountCard = () => {
                         Welcome back
                         <span className="font-semibold">{user.userName}</span>
                     </div>
-                    <div className='w-12 h-12 relative rounded-full overflow-hidden'>
-                        <Image alt="Profile pic" src={profilePics[user.profileIMG].src} fill className='object-cover'/>
+                    <div className='w-12 h-12 relative rounded-full overflow-hidden select-none'>
+                        <Image alt="Profile pic" src={profilePics[user.profileIMG ?? 0].src} fill className='object-cover'/>
                     </div>
                 </div>
             </Tooltip>
@@ -95,7 +99,7 @@ const AccountCard = () => {
                                                     <div className={cn("absolute inset-0 neumorphic-in", userPic === pic.id ? "visible" : "invisible")}/>
                                                 </div>
                                             ))}
-                                            <input type="hidden" name="pic" value={userPic}/>
+                                            <input type="hidden" name="pic" value={userPic === user.profileIMG ? "" : userPic}/>
                                         </div>
                                     </div>
                                     <Divider/>
