@@ -1,7 +1,7 @@
 import {Nunito, Rubik} from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import {getUser} from "@/lib/api";
+import {getFootprint, getUser} from "@/lib/api";
 
 const rubik = Rubik({
     variable: "--font-rubik",
@@ -27,7 +27,7 @@ export default async function RootLayout({children}) {
         <body
             className={`${rubik.variable} ${nunito.variable} antialiased bg-black`}
         >
-        <Providers user={await getUser()}>
+        <Providers user={await getUser()} footprint={await getFootprint()}>
             {children}
         </Providers>
         </body>

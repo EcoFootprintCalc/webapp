@@ -38,22 +38,22 @@ const AccountCard = () => {
             if (state.passwordOk === 'success') addToast({
                 title: "Password changed",
                 description: "Your password has been changed successfully",
-                color: "success"
+                color: "success", timeout: 2000, shouldShowTimeoutProgress: true
             })
             if (state.passwordOk === 'failure') addToast({
                 title: "Password not changed",
                 description: "Your password change was unsuccessful",
-                color: "danger"
+                color: "danger", timeout: 2000, shouldShowTimeoutProgress: true
             })
             if (state.picOk === 'success') addToast({
                 title: "Profile pic changed",
                 description: "Your profile pic has been changed successfully",
-                color: "success"
+                color: "success", timeout: 2000, shouldShowTimeoutProgress: true
             })
             if (state.picOk === 'failure') addToast({
                 title: "Profile pic not changed",
                 description: "Your profile pic change was unsuccessful",
-                color: "danger"
+                color: "danger", timeout: 2000, shouldShowTimeoutProgress: true
             })
         }
     }, [state]);

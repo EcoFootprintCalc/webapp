@@ -2,7 +2,7 @@
 
 import {Divider} from "@heroui/divider";
 import {Textarea} from "@heroui/input";
-import {NumberInput, Tab, Tabs} from "@heroui/react";
+import {addToast, NumberInput, Tab, Tabs} from "@heroui/react";
 import {BookCheck, List, Sparkles} from "lucide-react";
 import {Select, SelectItem} from "@heroui/select";
 import {Button} from "@heroui/button";
@@ -50,8 +50,13 @@ const CalculatorInput = ({presets} = []) => {
                                 className="col-span-1 lg:col-span-2 h-12 text-primary font-medium neumorphic data-[pressed]:neumorphic-in"
                                 onPress={async () => {
                                     if (!preset.id) return;
-                                    const footprint = await postPreset(preset.id, value);
-                                    calculator.addFootprint(footprint);
+                                    const data = await postPreset(preset.id, value);
+                                    calculator.setFootprint(data.sum);
+                                    addToast({
+                                        title: "Activity Recorded",
+                                        description: `${data.footprint} kg of CO2 was added to your daily footprint`,
+                                        color: "default", timeout: 2000, shouldShowTimeoutProgress: true
+                                    })
                                 }}>
                             Record Activity
                         </Button>
@@ -72,8 +77,13 @@ const CalculatorInput = ({presets} = []) => {
                             className="w-full h-12 text-primary font-medium neumorphic data-[pressed]:neumorphic-in"
                             onPress={async () => {
                                 if (!prompt) return;
-                                const footprint = await postCustom(prompt);
-                                calculator.addFootprint(footprint);
+                                const data = await postCustom(prompt);
+                                calculator.setFootprint(data.sum);
+                                addToast({
+                                    title: "Activity Recorded",
+                                    description: `${data.footprint} kg of CO2 was added to your daily footprint`,
+                                    color: "default", timeout: 2000, shouldShowTimeoutProgress: true
+                                })
                             }}>
                         Record Activity
                     </Button>
