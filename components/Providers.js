@@ -1,19 +1,25 @@
 "use client"
 
-import {HeroUIProvider, ToastProvider} from "@heroui/react";
 import {createContext, useContext, useState} from "react";
 import Image from "next/image";
+import {HeroUIProvider, ToastProvider} from "@heroui/react";
 
-const Providers = ({user, footprint, children}) => {
+export const UIProviders = ({children}) => {
     return (
         <HeroUIProvider>
             <ToastProvider/>
-            <LightProvider>
-                <UserProvider user={user} sum={footprint}>
-                    {children}
-                </UserProvider>
-            </LightProvider>
+            {children}
         </HeroUIProvider>
+    );
+}
+
+const Providers = ({user, footprint, children}) => {
+    return (
+        <LightProvider>
+            <UserProvider user={user} sum={footprint}>
+                {children}
+            </UserProvider>
+        </LightProvider>
     );
 }
 

@@ -13,12 +13,14 @@ const loggedIn = async (token) => {
 export async function middleware(request) {
     const {pathname} = request.nextUrl;
     const authToken = request.cookies.get('auth_token');
+    const user = await loggedIn(authToken);
 
-    if (pathname === '/' && !await loggedIn(authToken))
-        return NextResponse.redirect(new URL('/auth/login', request.url));
+    console.log(pathname, user)
 
-    if (pathname.startsWith('/auth') && await loggedIn(authToken))
-        return NextResponse.redirect(new URL('/', request.url));
+    if (pathname.startsWith('/auth') && user) return NextResponse.redirect(new URL('/calculator', request.url));
+    if (!pathname.startsWith('/auth') && !user) return NextResponse.redirect(new URL('/auth/login', request.url));
+
+    if (pathname === '/') return NextResponse.redirect(new URL('/calculator', request.url));
 
     return NextResponse.next();
 }
@@ -26,6 +28,7 @@ export async function middleware(request) {
 export const config = {
     matcher: [
         '/',
+        '/calculator',
         '/auth/:path*',
     ],
 };
