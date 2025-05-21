@@ -1,7 +1,8 @@
 import {Button} from "@heroui/button";
-import {ChartLine, Ellipsis, Goal, LayoutDashboard, Users} from "lucide-react";
+import {CarFront, ChartLine, Ellipsis, Goal, LayoutDashboard} from "lucide-react";
 import LightToggle from "@/components/LightToggle";
 import Logo from "@/components/Logo";
+import Link from "next/link";
 
 const MenuCard = () => {
     return (
@@ -14,17 +15,27 @@ const MenuCard = () => {
                 <div className="absolute inset-0 [background-size:30px_30px] [background-image:radial-gradient(#444444_1px,transparent_1px)] hidden lg:block"/>
                 <Logo className="z-20 w-full items-center justify-center py-16 select-none bg-radial from-background to-transparent hidden lg:flex"/>
                 <div className='hidden lg:flex flex-col gap-4 items-center w-full px-6'>
-                    <Button color='primary' variant='light' size='lg' className="w-full font-medium" startContent={<LayoutDashboard/>}>Dashboard</Button>
+                    <Link href="/calculator" className="w-full">
+                        <Button color='primary' variant='light' size='lg' className="w-full font-medium" startContent={<LayoutDashboard/>}>Dashboard</Button>
+                    </Link>
+                    <Link href="/calculator/vehicles" className="w-full">
+                        <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<CarFront/>}>Vehicles</Button>
+                    </Link>
                     <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<Goal/>}>Goals</Button>
                     <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartLine/>}>History</Button>
                     <Button color='default' variant='light' size='lg' className="w-full font-medium" startContent={<Ellipsis/>}>More</Button>
                 </div>
 
                 <div className='flex lg:hidden flex-row gap-4 items-center justify-around w-full'>
-                    <Button color='primary' variant='light' size='lg' isIconOnly className=""><LayoutDashboard/></Button>
-                    <Button color='secondary' variant='light' size='lg' isIconOnly className=""><Goal/></Button>
-                    <Button color='secondary' variant='light' size='lg' isIconOnly className=""><ChartLine/></Button>
-                    <Button color='default' variant='light' size='lg' isIconOnly className=""><Ellipsis/></Button>
+                    <Link href="/calculator">
+                        <Button color='primary' variant='light' size='lg' isIconOnly><LayoutDashboard/></Button>
+                    </Link>
+                    <Link href="/calculator/vehicles" className="w-full">
+                        <Button color='secondary' variant='light' size='lg' isIconOnly><CarFront/></Button>
+                    </Link>
+                    <Button color='secondary' variant='light' size='lg' isIconOnly><Goal/></Button>
+                    <Button color='secondary' variant='light' size='lg' isIconOnly><ChartLine/></Button>
+                    <Button color='default' variant='light' size='lg' isIconOnly><Ellipsis/></Button>
                 </div>
 
                 <div className='absolute bottom-4 flex-col items-center gap-4 hidden lg:flex'>
