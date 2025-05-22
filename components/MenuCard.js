@@ -30,7 +30,7 @@ const MenuCard = () => {
                     <Link href="/calculator">
                         <Button color='primary' variant='light' size='lg' isIconOnly><LayoutDashboard/></Button>
                     </Link>
-                    <Link href="/calculator/vehicles" className="w-full">
+                    <Link href="/calculator/vehicles">
                         <Button color='secondary' variant='light' size='lg' isIconOnly><CarFront/></Button>
                     </Link>
                     <Button color='secondary' variant='light' size='lg' isIconOnly><Goal/></Button>
