@@ -15,8 +15,6 @@ export async function middleware(request) {
     const authToken = request.cookies.get('auth_token');
     const user = await loggedIn(authToken);
 
-    console.log(pathname, user)
-
     if (pathname.startsWith('/auth') && user) return NextResponse.redirect(new URL('/calculator', request.url));
     if (!pathname.startsWith('/auth') && !user) return NextResponse.redirect(new URL('/auth/login', request.url));
 

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const MenuCard = () => {
     return (
-        <div className="fixed w-full lg:w-[25%] xl:w-[20%] 2xl:w-[15%] p-6 lg:h-screen left-0 bottom-0 group">
+        <div className="fixed w-full lg:w-[25%] xl:w-[20%] 2xl:w-[15%] p-6 lg:h-screen left-0 bottom-[env(safe-area-inset-bottom)] group">
             <div className="absolute inset-6 bg-primary invisible group-hover:visible transition-transform blur-[10px] animate-pulse rounded-2xl"/>
             <div className="
                 relative w-full h-auto lg:h-full z-10 group-hover:scale-101 transition-transform flex flex-col items-center bg-background rounded-2xl
