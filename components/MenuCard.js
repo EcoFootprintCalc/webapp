@@ -1,5 +1,5 @@
 import {Button} from "@heroui/button";
-import {CarFront, ChartLine, Ellipsis, Goal, LayoutDashboard} from "lucide-react";
+import {CarFront, ChartLine, ChartPie, Ellipsis, LayoutDashboard} from "lucide-react";
 import LightToggle from "@/components/LightToggle";
 import Logo from "@/components/Logo";
 import Link from "next/link";
@@ -21,7 +21,9 @@ const MenuCard = () => {
                     <Link href="/calculator/vehicles" className="w-full">
                         <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<CarFront/>}>Vehicles</Button>
                     </Link>
-                    <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<Goal/>}>Goals</Button>
+                    <Link href="/calculator/breakdown" className="w-full">
+                        <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartPie/>}>Breakdown</Button>
+                    </Link>
                     <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartLine/>}>History</Button>
                     <Button color='default' variant='light' size='lg' className="w-full font-medium" startContent={<Ellipsis/>}>More</Button>
                 </div>
@@ -33,7 +35,9 @@ const MenuCard = () => {
                     <Link href="/calculator/vehicles">
                         <Button color='secondary' variant='light' size='lg' isIconOnly><CarFront/></Button>
                     </Link>
-                    <Button color='secondary' variant='light' size='lg' isIconOnly><Goal/></Button>
+                    <Link href="/calculator/breakdown">
+                        <Button color='secondary' variant='light' size='lg' isIconOnly><ChartPie/></Button>
+                    </Link>
                     <Button color='secondary' variant='light' size='lg' isIconOnly><ChartLine/></Button>
                     <Button color='default' variant='light' size='lg' isIconOnly><Ellipsis/></Button>
                 </div>

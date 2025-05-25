@@ -54,7 +54,7 @@ const CalculatorInput = ({presets} = []) => {
                                     calculator.setFootprint(data.sum);
                                     addToast({
                                         title: "Activity Recorded",
-                                        description: `${data.footprint} kg of CO2 was added to your daily footprint`,
+                                        description: `${data.footprint} grams of CO2 was added to your daily footprint`,
                                         color: "default", timeout: 2000, shouldShowTimeoutProgress: true
                                     })
                                 }}>

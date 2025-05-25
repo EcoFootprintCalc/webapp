@@ -1,12 +1,9 @@
-import MenuCard from "@/components/MenuCard";
-import AccountCard from "@/components/AccountCard";
 import RotatingGradient from "@/components/RotatingGradient";
-import CalculatorInput from "@/components/CalculatorInput";
 import CalculatorResults from "@/components/CalculatorResults";
-import {fetchPresets, getVehicles} from "@/lib/api";
+import {getVehicles} from "@/lib/api";
 import Vehicles from "@/components/Vehicles";
 
-const Home = async () => {
+const VehiclePage = async () => {
     return (
         <main className="flex flex-col w-full h-[100dvh] overflow-hidden items-center justify-center gap-8 bg-background px-6 lg:px-[25%]">
             <div className="relative w-full max-w-3xl neumorphic rounded-2xl group">
@@ -23,4 +20,4 @@ const Home = async () => {
     );
 }
 
-export default Home;
+export default VehiclePage;

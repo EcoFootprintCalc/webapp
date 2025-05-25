@@ -27,6 +27,7 @@ export const config = {
     matcher: [
         '/',
         '/calculator',
+        '/calculator/:path*',
         '/auth/:path*',
     ],
 };

@@ -7,7 +7,8 @@ import {Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@heroui/
 import {Divider} from "@heroui/divider";
 import {Input} from "@heroui/input";
 import {useActionState, useEffect, useMemo, useState} from "react";
-import {addVehicle} from "@/lib/api";
+import {addVehicle, saveTrip} from "@/lib/api";
+import {useCalculator} from "@/components/Providers";
 
 const hashColor = (str) => {
     if (!str) return 'hsl(0,0%,80%)';
@@ -21,6 +22,7 @@ const hashColor = (str) => {
 }
 
 const Vehicles = ({loadedVehicles = []}) => {
+    const calculator = useCalculator();
     const [vehicles, setVehicles] = useState(loadedVehicles);
 
     const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -31,6 +33,7 @@ const Vehicles = ({loadedVehicles = []}) => {
     const newColor = useMemo(() => hashColor(enteredName), [enteredName]);
 
     const [addState, addAction, addPending] = useActionState(addVehicle, {err: false});
+    const [tripState, tripAction, tripPending] = useActionState(saveTrip, {err: false});
 
     useEffect(() => {
         if (addState.finish) {
@@ -49,9 +52,26 @@ const Vehicles = ({loadedVehicles = []}) => {
             }
             onAddOpenChange();
         }
-
-
     }, [addState]);
+
+    useEffect(() => {
+        if (tripState.finish) {
+            if (tripState.err) addToast({
+                title: "Error",
+                description: "Something went wrong",
+                color: "danger", timeout: 2000, shouldShowTimeoutProgress: true
+            })
+            else {
+                addToast({
+                    title: "Trip recorded",
+                    description: `Your trip has been recorded successfully, ${tripState.tripFootprint} grams of CO2 was added to your daily footprint`,
+                    color: "success", timeout: 2000, shouldShowTimeoutProgress: true
+                });
+                calculator.setFootprint(tripState.newFootprint);
+            }
+            onTripOpenChange();
+        }
+    }, [tripState]);
 
     return (
         <div className="relative w-full bg-background rounded-2xl p-4 flex flex-col items-center lg:items-start">
@@ -89,9 +109,9 @@ const Vehicles = ({loadedVehicles = []}) => {
                     {selectedVehicle && ((onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1">Record a trip with {selectedVehicle.name}</ModalHeader>
-                            <form>
-                                <ModalBody className='flex flex-col gap-2 mb-2'>
-                                    <div className="flex flex-row items-center">
+                            <form action={tripAction}>
+                                <ModalBody className='grid grid-cols-2 gap-2 mb-2'>
+                                    <div className="flex flex-row items-center col-span-2">
                                         <Car size={64} className="flex-1/2" style={{color: hashColor(selectedVehicle.name)}}/>
                                         <div className="flex flex-col gap-1 flex-1/2">
                                             <p className="font-bold text-lg">{selectedVehicle.name}</p>
@@ -99,14 +119,19 @@ const Vehicles = ({loadedVehicles = []}) => {
                                             <p>{selectedVehicle.avgFuelConsumption} L / 100 km</p>
                                         </div>
                                     </div>
-                                    <Divider className="my-1"/>
-                                    <NumberInput placeholder="Distance traveled" aria-label="Kilometers traveled" name="distance" className="w-full" required
-                                                 minValue={1} step={1} size='lg' endContent={"km"}
+                                    <Divider className="my-1 col-span-2"/>
+                                    <NumberInput placeholder="Distance" aria-label="Kilometers traveled" name="distance" className="w-full col-span-1" required
+                                                 minValue={1} step={1} size='lg' endContent={"km"} type="number"
                                                  classNames={{inputWrapper: "neumorphic data-[hover]:neumorphic-in data-[focus]:neumorphic-in h-12"}}
                                     />
+                                    <NumberInput placeholder="Extra Passengers" aria-label="Extra Passengers" name="distance" className="w-full col-span-1"
+                                                 minValue={0} step={1} size='lg' type="number"
+                                                 classNames={{inputWrapper: "neumorphic data-[hover]:neumorphic-in data-[focus]:neumorphic-in h-12"}}
+                                    />
+                                    <input type="hidden" name="vehicle" value={selectedVehicle.id}/>
                                 </ModalBody>
                                 <ModalFooter className="flex flex-row justify-evenly bg-black/10">
-                                    <Button color="primary" className="text-background w-1/3" onPress={onClose}>
+                                    <Button color="primary" className="text-background w-1/3" type="submit" isLoading={tripPending}>
                                         Save
                                     </Button>
                                 </ModalFooter>

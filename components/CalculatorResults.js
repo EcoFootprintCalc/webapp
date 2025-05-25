@@ -59,7 +59,7 @@ const CalculatorResults = ({}) => {
                                                 y={(viewBox.cy || 0) - 16}
                                                 className="fill-foreground/50 text-lg"
                                             >
-                                                kg
+                                                grams
                                             </tspan>
                                         </text>
                                     )
