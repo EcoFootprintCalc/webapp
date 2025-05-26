@@ -5,24 +5,23 @@ import {Label, PolarRadiusAxis, RadialBar, RadialBarChart,} from "recharts"
 import {ChartContainer} from "@/components/ui/chart"
 import {useMemo} from "react";
 import {useFootprint} from "@/components/Providers";
-
-const maxValue = 1000;
+import {globalAverageDaily} from "@/lib/masterdata";
 
 const CalculatorResults = ({}) => {
 
     const footprint = useFootprint();
 
     const chartData = useMemo(()=>{
-        return [{footprint: footprint, gap: maxValue - footprint}]
+        return [{footprint: footprint, gap: globalAverageDaily * 1.5 - footprint}]
     }, [footprint])
 
     const color = useMemo(()=>{
         switch (true) {
-            case footprint < 200:
+            case footprint < globalAverageDaily * 0.33:
                 return "hsl(var(--heroui-primary))"
-            case footprint < 500:
+            case footprint < globalAverageDaily * 0.67:
                 return "hsl(var(--heroui-secondary))"
-            case footprint < 800:
+            case footprint < globalAverageDaily:
                 return "hsl(var(--heroui-warning))"
             default:
                 return "hsl(var(--heroui-danger))"

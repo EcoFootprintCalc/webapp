@@ -1,6 +1,5 @@
 import {Button} from "@heroui/button";
 import {CarFront, ChartLine, ChartPie, Ellipsis, LayoutDashboard} from "lucide-react";
-import LightToggle from "@/components/LightToggle";
 import Logo from "@/components/Logo";
 import Link from "next/link";
 
@@ -43,7 +42,6 @@ const MenuCard = () => {
                 </div>
 
                 <div className='absolute bottom-4 flex-col items-center gap-4 hidden lg:flex'>
-                    <LightToggle/>
                     <p className='text-foreground/50 text-sm font-normal'>designed in Szombathely</p>
                 </div>
             </div>

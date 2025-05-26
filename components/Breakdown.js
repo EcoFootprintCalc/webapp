@@ -7,9 +7,7 @@ import {useFootprint} from "@/components/Providers";
 import {useMemo} from "react";
 import {Tab, Tabs} from "@heroui/react";
 import {CalendarDays, Clock} from "lucide-react";
-
-const globalAverageDaily = 13000;
-const globalAverageMonthly = 390000;
+import {globalAverageDaily, globalAverageMonthly} from "@/lib/masterdata";
 
 const Daily = ({categories, dailyData}) => {
     const footprint = useFootprint();
@@ -41,6 +39,9 @@ const Daily = ({categories, dailyData}) => {
                         data={chartData}
                         dataKey="footPrintAmount"
                         nameKey="category"
+                        animationBegin={0}
+                        startAngle={180}
+                        endAngle={-180}
                         innerRadius={55}
                         outerRadius={80}
                         strokeWidth={5}
@@ -126,6 +127,9 @@ const Monthly = ({categories, monthlyData}) => {
                         data={chartData}
                         dataKey="footPrintAmount"
                         nameKey="category"
+                        animationBegin={0}
+                        startAngle={180}
+                        endAngle={-180}
                         innerRadius={55}
                         outerRadius={80}
                         strokeWidth={5}

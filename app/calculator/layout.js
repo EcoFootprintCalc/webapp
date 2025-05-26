@@ -1,14 +1,22 @@
-import Providers from "@/components/Providers";
-import {getFootprint, getUser} from "@/lib/api";
 import MenuCard from "@/components/MenuCard";
 import AccountCard from "@/components/AccountCard";
+import {Suspense} from "react";
+import MainProvider from "@/components/MainProvider";
+import Loading from "@/components/Loading";
 
 const Home = async ({children}) => {
-    return <Providers user={await getUser()} footprint={await getFootprint()}>
-        <MenuCard/>
-        <AccountCard/>
-        {children}
-    </Providers>
+    return (
+        <>
+            <MenuCard/>
+            <Suspense fallback={<Loading/>}>
+                <MainProvider>
+                    <AccountCard/>
+                    {children}
+                </MainProvider>
+            </Suspense>
+        </>
+    )
+
 };
 
 export default Home;
