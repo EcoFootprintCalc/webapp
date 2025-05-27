@@ -20,6 +20,23 @@ const CalculatorInput = ({presets} = []) => {
     const lg = useMediaQuery({query: "(min-width: 1024px)"});
     const calculator = useCalculator();
 
+    const handleData = (data) => {
+        if (data.footprint === undefined || data.sum === undefined) {
+            addToast({
+                title: "Error",
+                description: "Something went wrong, please try again",
+                variant: "destructive"
+            });
+            return;
+        }
+        calculator.setFootprint(data.sum);
+        addToast({
+            title: "Activity Recorded",
+            description: `${data.footprint} grams of CO2 was added to your daily footprint`,
+            color: "default", timeout: 2000, shouldShowTimeoutProgress: true
+        })
+    }
+
     return (
         <div className="relative w-full bg-background rounded-2xl p-2 flex flex-col items-center lg:items-start">
             <Tabs aria-label="Input method" variant="underlined" color="default" className="">
@@ -51,12 +68,7 @@ const CalculatorInput = ({presets} = []) => {
                                 onPress={async () => {
                                     if (!preset.id) return;
                                     const data = await postPreset(preset.id, value);
-                                    calculator.setFootprint(data.sum);
-                                    addToast({
-                                        title: "Activity Recorded",
-                                        description: `${data.footprint} grams of CO2 was added to your daily footprint`,
-                                        color: "default", timeout: 2000, shouldShowTimeoutProgress: true
-                                    })
+                                    handleData(data);
                                 }}>
                             Record Activity
                         </Button>
@@ -78,12 +90,7 @@ const CalculatorInput = ({presets} = []) => {
                             onPress={async () => {
                                 if (!prompt) return;
                                 const data = await postCustom(prompt);
-                                calculator.setFootprint(data.sum);
-                                addToast({
-                                    title: "Activity Recorded",
-                                    description: `${data.footprint} kg of CO2 was added to your daily footprint`,
-                                    color: "default", timeout: 2000, shouldShowTimeoutProgress: true
-                                })
+                                handleData(data);
                             }}>
                         Record Activity
                     </Button>

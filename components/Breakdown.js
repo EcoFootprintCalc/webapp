@@ -59,7 +59,7 @@ const Daily = ({categories, dailyData}) => {
                                             <tspan
                                                 x={viewBox.cx}
                                                 y={viewBox.cy}
-                                                className="fill-foreground text-2xl font-bold"
+                                                className="fill-foreground text-xl font-bold"
                                             >
                                                 {footprint.toLocaleString("en-US")}
                                             </tspan>
@@ -147,14 +147,14 @@ const Monthly = ({categories, monthlyData}) => {
                                             <tspan
                                                 x={viewBox.cx}
                                                 y={viewBox.cy}
-                                                className="fill-foreground text-2xl font-bold"
+                                                className="fill-foreground text-lg font-bold"
                                             >
                                                 {footprint.toLocaleString("en-US")}
                                             </tspan>
                                             <tspan
                                                 x={viewBox.cx}
-                                                y={(viewBox.cy || 0) + 24}
-                                                className="fill-foreground/50 text-lg"
+                                                y={(viewBox.cy || 0) + 20}
+                                                className="fill-foreground/50"
                                             >
                                                 grams
                                             </tspan>
