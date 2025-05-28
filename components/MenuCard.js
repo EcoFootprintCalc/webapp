@@ -23,7 +23,9 @@ const MenuCard = () => {
                     <Link href="/calculator/breakdown" className="w-full">
                         <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartPie/>}>Breakdown</Button>
                     </Link>
-                    <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartLine/>}>History</Button>
+                    <Link href="/calculator/progress" className="w-full">
+                        <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartLine/>}>Progress</Button>
+                    </Link>
                     <Button color='default' variant='light' size='lg' className="w-full font-medium" startContent={<Ellipsis/>}>More</Button>
                 </div>
 
@@ -37,7 +39,9 @@ const MenuCard = () => {
                     <Link href="/calculator/breakdown">
                         <Button color='secondary' variant='light' size='lg' isIconOnly><ChartPie/></Button>
                     </Link>
-                    <Button color='secondary' variant='light' size='lg' isIconOnly><ChartLine/></Button>
+                    <Link href="/calculator/progress">
+                        <Button color='secondary' variant='light' size='lg' isIconOnly><ChartLine/></Button>
+                    </Link>
                     <Button color='default' variant='light' size='lg' isIconOnly><Ellipsis/></Button>
                 </div>
 

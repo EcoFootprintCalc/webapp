@@ -65,7 +65,7 @@ const Vehicles = ({loadedVehicles = []}) => {
                 addToast({
                     title: "Trip recorded",
                     description: `Your trip has been recorded successfully, ${tripState.tripFootprint} grams of CO2 was added to your daily footprint`,
-                    color: "success", timeout: 2000, shouldShowTimeoutProgress: true
+                    color: "default", timeout: 2000, shouldShowTimeoutProgress: true
                 });
                 calculator.setFootprint(tripState.newFootprint);
             }
