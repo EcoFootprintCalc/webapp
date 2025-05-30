@@ -3,6 +3,7 @@ import AccountCard from "@/components/AccountCard";
 import {Suspense} from "react";
 import MainProvider from "@/components/MainProvider";
 import Loading from "@/components/Loading";
+import Chat from "@/components/Chat";
 
 const Home = async ({children}) => {
     return (
@@ -14,6 +15,7 @@ const Home = async ({children}) => {
                     {children}
                 </MainProvider>
             </Suspense>
+            <Chat/>
         </>
     )
 

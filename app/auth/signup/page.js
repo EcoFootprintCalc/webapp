@@ -5,7 +5,6 @@ import {Input} from "@heroui/input";
 import {Button} from "@heroui/button";
 import {useActionState} from "react";
 import {signup} from "@/lib/api";
-import Image from "next/image";
 
 
 const SignUp = () => {
@@ -27,11 +26,6 @@ const SignUp = () => {
                         <Button size="lg" color={state.err ? "danger" : "primary"} className="text-background w-full" disabled={pending} type="submit">Sign up now!</Button>
                         <a href="/auth/login" className="text-foreground/50 text-sm font-normal text-center">Already have an account? Log in now!</a>
                     </form>
-                    {pending &&
-                        <div className="absolute inset-0 opacity-20">
-                            <Image src={"/biggestboy.gif"} alt={"Loading"} fill className='object-cover'/>
-                        </div>
-                    }
                 </div>
             </main>
         </div>
