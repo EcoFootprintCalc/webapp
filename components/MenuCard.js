@@ -26,7 +26,6 @@ const MenuCard = () => {
                     <Link href="/calculator/progress" className="w-full">
                         <Button color='secondary' variant='light' size='lg' className="w-full font-medium" startContent={<ChartLine/>}>Progress</Button>
                     </Link>
-                    <Button color='default' variant='light' size='lg' className="w-full font-medium" startContent={<Ellipsis/>}>More</Button>
                 </div>
 
                 <div className='flex lg:hidden flex-row gap-4 items-center justify-around w-full'>
@@ -42,7 +41,6 @@ const MenuCard = () => {
                     <Link href="/calculator/progress">
                         <Button color='secondary' variant='light' size='lg' isIconOnly><ChartLine/></Button>
                     </Link>
-                    <Button color='default' variant='light' size='lg' isIconOnly><Ellipsis/></Button>
                 </div>
 
                 <div className='absolute bottom-4 flex-col items-center gap-4 hidden lg:flex'>

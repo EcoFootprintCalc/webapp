@@ -5,7 +5,6 @@ import {Area, AreaChart, CartesianGrid, XAxis} from "recharts"
 import {globalAverageDaily} from "@/lib/masterdata";
 
 const History = ({data}) => {
-    console.log(data)
 
     return (
         <div className="relative bg-background rounded-2xl p-4 flex flex-col items-center">
@@ -52,14 +51,17 @@ const History = ({data}) => {
                             <stop
                                 offset={0}
                                 stopColor="hsl(var(--heroui-primary))"
-                                stopOpacity={0.1}
                             />
                             <stop
-                                offset={(0.75 * globalAverageDaily) / data.max}
+                                offset={(0.2 * globalAverageDaily) / data.max}
+                                stopColor="hsl(var(--heroui-primary))"
+                            />
+                            <stop
+                                offset={(0.5 * globalAverageDaily) / data.max}
                                 stopColor="hsl(var(--heroui-warning))"
                             />
                             <stop
-                                offset={1}
+                                offset={globalAverageDaily / data.max}
                                 stopColor="hsl(var(--heroui-danger))"
                             />
                         </linearGradient>

@@ -17,7 +17,8 @@ export default heroui(
                         "100": '#292d30',
                         "200": '#272b2e',
                         DEFAULT: '#292d30'
-                    }
+                    },
+                    danger: '#e9373d'
                 }
             }
         },

@@ -32,10 +32,10 @@ const CalculatorResults = ({}) => {
         <div className="relative bg-background rounded-2xl p-4 flex flex-col items-center">
             <ChartContainer
                 config={{}}
-                className="w-full lg:w-1/2"
+                className="mx-auto aspect-[2/1] h-40"
             >
                 <RadialBarChart
-                    cx="50%" cy="90%"
+                    cy="90%"
                     data={chartData}
                     startAngle={180} endAngle={0}
                     innerRadius={120} outerRadius={190}
