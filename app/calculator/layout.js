@@ -15,7 +15,7 @@ const Home = async ({children}) => {
                     {children}
                 </MainProvider>
             </Suspense>
-            <Chat/>
+            <Chat className="fixed bottom-6 right-6 w-90 bg-background rounded-2xl neumorphic hidden lg:flex flex-col z-50 p-2"/>
         </>
     )
 

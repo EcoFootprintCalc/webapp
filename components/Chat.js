@@ -1,16 +1,19 @@
 "use client";
-import {useActionState, useEffect, useState} from "react";
+import {useState} from "react";
 import {getChatResponse} from "@/lib/api";
 import {Input} from "@heroui/input";
 import {Button} from "@heroui/button";
 import {cn} from "@/lib/utils";
+import {ChartLine, MessageCircleQuestion} from "lucide-react";
+import {Modal, ModalBody, ModalContent, ModalHeader} from "@heroui/modal";
+import {useDisclosure} from "@heroui/react";
 
-const Chat = () => {
+const Chat = ({className}) => {
     const [messages, setMessages] = useState([]);
     const [pending, setPending] = useState(false);
 
     return (
-        <div className="fixed bottom-6 right-6 w-90 bg-background rounded-2xl neumorphic hidden lg:flex flex-col z-50 p-2">
+        <div className={className}>
             <div className="p-4 flex-1 overflow-y-auto max-h-[50dvh]">
                 {messages.map((msg, index) => (
                     <div key={index}
@@ -26,13 +29,13 @@ const Chat = () => {
                 const formData = new FormData(event.currentTarget);
                 const message = formData.get("message");
                 event.currentTarget.reset();
-                setMessages((prev)=>[...prev, {role: "user", content: message}]);
+                setMessages((prev) => [...prev, {role: "user", content: message}]);
                 const response = await getChatResponse(message);
-                setMessages((prev)=>[...prev, {role: "bot", content: response}]);
+                setMessages((prev) => [...prev, {role: "bot", content: response}]);
                 setPending(false);
             }} className="flex flex-row">
                 <Input
-                    name = "message" type="text" autoComplete="off"
+                    name="message" type="text" autoComplete="off"
                     placeholder="Ask how to be more eco-friendly..." aria-label="Message"
                     variant="flat"
                 />
@@ -41,5 +44,30 @@ const Chat = () => {
         </div>
     );
 };
+
+export const ChatModal = () => {
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    return (
+        <>
+            <Button color='secondary' variant='light' size='lg' isIconOnly onPress={onOpenChange}><MessageCircleQuestion/></Button>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop='blur'
+                   classNames={{
+                       base: "bg-background shadow-xl"
+                   }}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">Eco-friendly advice assistant</ModalHeader>
+                            <ModalBody className='flex flex-col gap-2 mb-2'>
+                                <Chat/>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+        </>
+    )
+}
 
 export default Chat;

@@ -72,7 +72,7 @@ const AccountCard = () => {
                         <span className="font-semibold">{user.userName}</span>
                     </div>
                     <div className='w-12 h-12 relative rounded-full overflow-hidden select-none'>
-                        <Image alt="Profile pic" src={profilePics[user.profileIMG ?? 0].src} fill className='object-cover'/>
+                        <Image alt="Profile pic" src={profilePics[user.profileIMG ?? 0].src} fill sizes='10vw' className='object-cover'/>
                     </div>
                 </div>
             </Tooltip>
@@ -95,7 +95,7 @@ const AccountCard = () => {
                                                      onClick={() => setUserPic(pic.id)}
                                                 >
                                                     <Image alt="Profile pic" src={pic.src} fill className={cn('object-cover pointer-events-none transition-transform',
-                                                        userPic === pic.id ? "scale-110" : '')}/>
+                                                        userPic === pic.id ? "scale-110" : '')} sizes='20vw'/>
                                                     <div className={cn("absolute inset-0 neumorphic-in", userPic === pic.id ? "visible" : "invisible")}/>
                                                 </div>
                                             ))}

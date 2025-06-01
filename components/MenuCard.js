@@ -1,7 +1,8 @@
 import {Button} from "@heroui/button";
-import {CarFront, ChartLine, ChartPie, Ellipsis, LayoutDashboard} from "lucide-react";
+import {CarFront, ChartLine, ChartPie, LayoutDashboard} from "lucide-react";
 import Logo from "@/components/Logo";
 import Link from "next/link";
+import {ChatModal} from "@/components/Chat";
 
 const MenuCard = () => {
     return (
@@ -41,6 +42,7 @@ const MenuCard = () => {
                     <Link href="/calculator/progress">
                         <Button color='secondary' variant='light' size='lg' isIconOnly><ChartLine/></Button>
                     </Link>
+                    <ChatModal/>
                 </div>
 
                 <div className='absolute bottom-4 flex-col items-center gap-4 hidden lg:flex'>
