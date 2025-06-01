@@ -2,7 +2,7 @@ import RotatingGradient from "@/components/RotatingGradient";
 import CalculatorInput from "@/components/CalculatorInput";
 import CalculatorResults from "@/components/CalculatorResults";
 import {fetchPresets, getRecommendation} from "@/lib/api";
-import Recommendation from "@/components/Recomendation";
+import Recommendation from "@/components/Recommendation";
 
 const Home = async () => {
 
