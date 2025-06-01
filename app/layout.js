@@ -23,6 +23,7 @@ export default async function RootLayout({children}) {
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
             <meta name="apple-mobile-web-app-title" content="Sanyi"/>
+            <link rel="manifest" href="/manifest.webmanifest"/>
         </head>
         <body
             className={`${rubik.variable} ${nunito.variable} antialiased bg-black`}
