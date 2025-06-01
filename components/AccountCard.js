@@ -59,11 +59,11 @@ const AccountCard = () => {
     }, [state]);
 
     return (
-        <div className="fixed top-6 right-6 group">
+        <div className="fixed top-6 right-6 z-50 group">
             <div className="absolute inset-0 bg-primary invisible group-hover:visible transition-transform blur-[6px] animate-pulse rounded-2xl"/>
             <Tooltip content="My Account">
                 <div className="
-                relative z-10 group-hover:scale-101 transition-transform bg-background rounded-full lg:rounded-2xl
+                relative z-50 group-hover:scale-101 transition-transform bg-background rounded-full lg:rounded-2xl
                 neumorphic group-hover:shadow-none p-2 lg:p-3 flex flex-row items-center gap-4 cursor-pointer
                 " onClick={onOpen}>
 
